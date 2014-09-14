@@ -20,5 +20,5 @@ hs_err_pid*
 *.project
 *.sublime-project
 
-# Client JAR
-ABSoftware.jar
+# Allow Server JAR
+!ABServer.jar
