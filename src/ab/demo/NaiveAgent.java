@@ -23,8 +23,11 @@ import ab.demo.other.Shot;
 import ab.planner.TrajectoryPlanner;
 import ab.utils.StateUtil;
 import ab.vision.ABObject;
+import ab.vision.ABShape;
+import ab.vision.ABType;
 import ab.vision.GameStateExtractor.GameState;
 import ab.vision.Vision;
+
 
 public class NaiveAgent implements Runnable {
 
@@ -139,6 +142,14 @@ public class NaiveAgent implements Runnable {
 		}
         // get all the pigs
  		List<ABObject> pigs = vision.findPigsMBR();
+
+ 		 List<Block_details> blk=getVisualRecognition(vision);
+
+        for(int i=0;i<blk.size();i++)
+        {
+            Block_details temp=blk.get(i);
+            System.out.println(temp.id+" "+temp.type+" "+temp.shape);
+        }
 
 		GameState state = aRobot.getState();
 
@@ -270,6 +281,41 @@ public class NaiveAgent implements Runnable {
 		}
 		return state;
 	}
+
+
+    public class Block_details
+    {
+        int id;
+        String type;
+        ABShape shape;
+    }
+
+    public List<Block_details> getVisualRecognition(Vision vision)
+    {
+        List<ABObject> blocks=vision.findBlocksRealShape();
+        List<Block_details> result= new ArrayList<Block_details>();
+        for(int i=0;i<blocks.size();i++)
+        {
+            Block_details blkd=new Block_details();
+            ABObject temp=blocks.get(i);
+            ABType t=temp.getType();
+            String str="";
+            if(t.id==10)
+                str="Ice";
+            else if(t.id==11)
+                str="wood";
+            else if(t.id==12)
+                str="Stone";
+            else str="unknown";
+            blkd.id=temp.id;
+            blkd.type=str;
+            blkd.shape=temp.getShape();
+            result.add(blkd);
+        }
+        return  result;
+
+    }
+
 
 	public static void main(String args[]) {
 

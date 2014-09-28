@@ -56,6 +56,11 @@ public ABType getType()
 	return type;
 }
 
+public ABShape getShape()
+{
+	return shape; 
+}
+
 public Point getCenter() {
    return new Point((int)getCenterX(), (int)getCenterY());
 }

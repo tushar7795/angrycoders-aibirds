@@ -19,6 +19,8 @@ hs_err_pid*
 .eclipse
 *.project
 *.sublime-project
+out
+*.iml
 
 # Allow Server JAR
 !ABServer.jar
