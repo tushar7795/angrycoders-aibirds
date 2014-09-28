@@ -1,0 +1,29 @@
+AngryCoders
+Sacheendra Talluri - 201201091
+Tushar Santoki - 201201101
+Bhavik Patel - 201201196
+
+
+Abstract: 
+We use a common representation of the structure to calculate heuristics for selecting trajectory for unexplored structures and for recording previous results for learning. 
+
+
+Representation: 
+We calculate the forces on each object from 3 to 6 (this resolution can be later varied) different angles and form a graph representing the forces acting on a object and the forces exerted by an object. 
+For the purpose learning, we decompose the graph formed into subgraphs of 1 to 5 nodes. 
+
+
+Heuristics: 
+In the heuristics, first we find the exposed blocks. We start at the node for these blocks and find paths to all the pigs. We call the set of paths from each exposed block a collection. We find the collection which passes the force above threshold to most number of pigs. 
+
+
+Threshold: 
+It is the minimum force required to destroy a specific kind of pig. Different pigs like armoured and unarmoured have different threshold. The threshold is calculated by trial and error and can be updated during the learning process. 
+
+If multiple collections are found, we find the collection which has maximum average power. This is found by averaging the power of all paths. 
+The centre of gravity of starting block of this collection is hit at the angle closest to the angle initially picked. 
+
+
+Learning: 
+First the graph is decomposed into sub-graphs of 3 to 5 nodes(this resolution is variable) by minimum edge cutting. The forces on this sub-graph are estimated. We try to identify this sub-graph again in the next structure obtained after hitting the first structure. The change due the forces is recorded and is used in if such  substructure is identified again. 
+This graph obtained is partitioned before the heuristics and the sub-graphs are compared with the ones we already have. We find the bounds in which we apply the heuristic by looking at the previous results and finding the angle around which the score
